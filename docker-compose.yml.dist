@@ -1,0 +1,53 @@
+# Docker and Docker Compose based environment for Drupal.
+# See https://github.com/blinkreaction/drude for more information and documentation.
+
+# Web node
+web:
+  extends:
+    file: .drude/drude-services.yml
+    service: web
+  links:
+    - cli
+  environment:
+    - DOMAIN_NAME=web.%SITE_DOMAIN%
+    - VIRTUAL_HOST=%SITE_DOMAIN%
+
+# DB node
+db:
+  extends:
+    file: .drude/drude-services.yml
+    service: db
+  environment:
+    - DOMAIN_NAME=db.%SITE_DOMAIN%
+
+# CLI node
+# Used for all console commands and tools.
+# CLI node
+cli:
+  extends:
+    file: .drude/drude-services.yml
+    service: cli
+  links:
+    - db
+    - browser
+  environment:
+    - DOMAIN_NAME=cli.%SITE_DOMAIN%
+
+# Selenium2 node
+# Uncomment the service definition section below to start using selenium2 driver for Behat tests requiring JS support.
+browser:
+  hostname: browser
+  image: selenium/standalone-chrome
+  ports:
+   - "4444"
+  environment:
+    - DOMAIN_NAME=browser.%SITE_DOMAIN%
+
+# Varnish node
+#varnish:
+#  extends:
+#    file: .drude/drude-services.yml
+#    service: varnish
+#  environment:
+#    - VARNISH_BACKEND_HOST=web.drupal8.docker
+#    - VIRTUAL_HOST=varnish.%SITE_DOMAIN%
