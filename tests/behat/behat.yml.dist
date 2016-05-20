@@ -1,0 +1,53 @@
+# override to docker profile (and try to make profile and site tests available)
+docker:
+  extensions:
+    Behat\MinkExtension:
+      # URL of the site when accessed locally.
+      base_url: http://%SITE_DOMAIN%
+      selenium2:
+        wd_host: http://browser:4444/wd/hub
+      browser_name: chrome
+    Drupal\DrupalExtension:
+      drupal:
+        # Site docroot inside Drude.
+        drupal_root: /var/www/docroot
+      drush:
+        # Site docroot inside Drude.
+        root: /var/www/docroot
+
+# Local overrides to the default profile
+default:
+  suites:
+    lightning:
+      paths:
+        - /var/www/docroot/profiles/lightning/tests/features
+      contexts:
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - FeatureContext:
+            parameters:
+              screenshot_dir: %paths.base%/screenshots
+  extensions:
+    Behat\MinkExtension:
+      # URL of the site when accessed inside Drude.
+      base_url: http://%SITE_DOMAIN%
+      selenium2:
+        wd_host: http://browser:4444/wd/hub
+      # Configure browser to be used. Browser must be available on wd_host.
+      browser_name: chrome
+    Drupal\DrupalExtension:
+      drupal:
+        # Local site docroot.
+        drupal_root: '/var/www/docroot'
+      drush:
+      # https://github.com/jhedstrom/drupalextension/issues/88
+        global_options: '--strict=0'
+        # Local site docroot.
+        root: '/var/www/docroot'
+        # Custom step definitions provided by submodules in profiles (and soon sites folders) as .inc files need to be picked up
+
+imports:
+  - behat.common.yml

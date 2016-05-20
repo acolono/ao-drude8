@@ -1,0 +1,40 @@
+
+
+# The site domain under which it will be accessed.
+SITE_DOMAIN='d8.drude'
+
+# Set the user and host for ssh connection to stage.
+STAGE_LOGIN='ssh'
+
+# The drush alias under which the project can be accessed on the staging server
+# without leading @ (e.g. "pantheon.<site-name>.dev").
+STAGE_ALIAS=''
+
+# The site repo for this project. Set it to empty ("") to skip site download.
+SITE_REPO='';
+SITE_BRANCH='develop';
+
+# The build platform repo for this project. Examples:
+# on pantheon the long pantheon git clone url
+# https://git.drupal.org/project/drupal.git
+PLATFORM_REPO='https://github.com/pantheon-systems/drops-8.git';
+PLATFORM_BRANCH='master';
+# You can checkout a specific tag e.g. 8.0.5 for Drupal 8.0.5:
+#PLATFORM_TAG='8.0.5';
+
+# The profile repo for the platform.
+# The profile for this project. Set it to empty ("") to skip site download.
+PROFILE_REPO='https://git.drupal.org/project/lightning.git';
+PROFILE_BRANCH='8.x-1.x';
+
+# The installation profile to use (if no db dump exists):
+INSTALL_PROFILE='lightning';
+
+# Set to the appropriate site directory, can be left "default" normally.
+SITE_DIRECTORY='default'
+
+# Post process functions to run. Examples:
+# POST_PROCESS='init_nodesass themename'
+# POST_PROCESS='init_compass themename'
+POST_PROCESS=''
+

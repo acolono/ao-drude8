@@ -1,0 +1,13 @@
+# These should be initialized locally with `composer install`.
+bin/*
+vendor/*
+
+# Local config
+behat.yml
+
+# Screenshots
+screenshots/*
+!screenshots/.gitkeep
+
+# JUnit test logs
+junit

@@ -1,0 +1,11 @@
+{
+  "require": {
+    "behat/behat": "3.1.*@dev",
+    "drupal/drupal-extension": "dev-master",
+    "emuse/behat-html-formatter": "0.1.*"
+  },
+  "minimum-stability": "dev",
+  "config": {
+    "bin-dir": "bin/"
+  }
+}
